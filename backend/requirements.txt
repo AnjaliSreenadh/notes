@@ -69,7 +69,7 @@ matplotlib==3.10.1
 matplotlib-inline==0.1.7
 mysql==0.0.3
 mysql-connector-python==8.0.20
-mysqlclient==2.2.4
+# mysqlclient==2.2.4
 narwhals==1.35.0
 nest-asyncio==1.6.0
 numpy==1.26.4

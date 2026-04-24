@@ -1,10 +1,11 @@
+import pymysql
+pymysql.install_as_MySQLdb()
 from pathlib import Path
 import os
 import dj_database_url
-import pymysql
+
 
 # Fix MySQL driver issue
-pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -86,13 +87,18 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # DATABASE (Railway MySQL)
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'PBneFCnfOmFnjcZVeWjxhPdSraJgxqvg',
+        'HOST': 'maglev.proxy.rlwy.net',
+        'PORT': '23311',
+        'OPTIONS': {
+            'ssl': {'ssl_disabled': False}
+        }
+    }
 }
-
 
 # ========================
 # PASSWORD VALIDATION

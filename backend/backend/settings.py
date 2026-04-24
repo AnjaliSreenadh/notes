@@ -1,9 +1,6 @@
-import pymysql
 import sys
 
-pymysql.install_as_MySQLdb()
-sys.modules['MySQLdb'] = pymysql
-
+    
 from pathlib import Path
 import os
 

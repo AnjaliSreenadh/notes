@@ -1,13 +1,7 @@
-
-
 from pathlib import Path
 import os
 
-
-# Fix MySQL driver issue
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # ========================
 # SECURITY
@@ -84,7 +78,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # ========================
 # DATABASE (Railway MySQL)
-
+# ========================
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -95,6 +89,8 @@ DATABASES = {
         'PORT': '23311',
     }
 }
+
+
 # ========================
 # PASSWORD VALIDATION
 # ========================

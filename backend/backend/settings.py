@@ -2,18 +2,26 @@ from pathlib import Path
 import os
 import dj_database_url
 import pymysql
+
+# Fix MySQL driver issue
 pymysql.install_as_MySQLdb()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# ========================
 # SECURITY
-SECRET_KEY = 'django-insecure-change-this-in-production'
+# ========================
+SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-key")
+
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']  # You can later restrict to your render domain
+ALLOWED_HOSTS = ['.onrender.com']
 
 
+# ========================
 # APPLICATIONS
+# ========================
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -27,11 +35,13 @@ INSTALLED_APPS = [
 ]
 
 
+# ========================
 # MIDDLEWARE
+# ========================
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # for static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -41,11 +51,15 @@ MIDDLEWARE = [
 ]
 
 
+# ========================
 # URLS
+# ========================
 ROOT_URLCONF = 'backend.urls'
 
 
+# ========================
 # TEMPLATES
+# ========================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -62,18 +76,27 @@ TEMPLATES = [
 ]
 
 
+# ========================
 # WSGI
+# ========================
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-import dj_database_url
-import os
 
+# ========================
+# DATABASE (Railway MySQL)
+# ========================
 DATABASES = {
     'default': dj_database_url.parse(
-        os.environ.get("DATABASE_URL")
+        os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
     )
 }
+
+
+# ========================
 # PASSWORD VALIDATION
+# ========================
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -82,19 +105,25 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# ========================
 # INTERNATIONALIZATION
+# ========================
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
 
+# ========================
 # STATIC FILES
+# ========================
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
+# ========================
 # CORS
+# ========================
 CORS_ALLOW_ALL_ORIGINS = True

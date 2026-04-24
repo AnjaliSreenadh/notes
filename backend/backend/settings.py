@@ -1,8 +1,11 @@
 import pymysql
+import sys
+
 pymysql.install_as_MySQLdb()
+sys.modules['MySQLdb'] = pymysql
+
 from pathlib import Path
 import os
-
 
 
 # Fix MySQL driver issue
@@ -94,12 +97,8 @@ DATABASES = {
         'PASSWORD': 'PBneFCnfOmFnjcZVeWjxhPdSraJgxqvg',
         'HOST': 'maglev.proxy.rlwy.net',
         'PORT': '23311',
-        'OPTIONS': {
-            'ssl': {'ssl_disabled': False}
-        }
     }
 }
-
 # ========================
 # PASSWORD VALIDATION
 # ========================

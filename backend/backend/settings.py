@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # ========================
 # DATABASE (Railway MySQL)
-# ========================
+
 DATABASES = {
     'default': dj_database_url.parse(
         os.environ.get("DATABASE_URL"),

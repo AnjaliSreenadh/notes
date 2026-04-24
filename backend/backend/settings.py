@@ -2,7 +2,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from pathlib import Path
 import os
-import dj_database_url
+
 
 
 # Fix MySQL driver issue
